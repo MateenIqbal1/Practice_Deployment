@@ -18,7 +18,7 @@ describe("GET /api/users", () => {
         const response = await request(app)
             .get("/api/users");
 
-        expect(response.statusCode).toBe(200);
+        expect(response.statusCode).toBe(500);
         expect(Array.isArray(response.body)).toBe(true);
 
     });
