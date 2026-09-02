@@ -63,8 +63,8 @@ describe("POST /api/users", () => {
 
     });
 
-
 });
+
 
 describe("PUT /api/users/:id", () => {
 
@@ -86,7 +86,7 @@ describe("PUT /api/users/:id", () => {
         expect(response.statusCode).toBe(200);
         expect(response.body.name).toBe("Updated Name");
         expect(response.body.age).toBe(30);
-   await User.deleteOne({
+        await User.deleteOne({
             email: "old@example.com"
         });
     });
@@ -114,20 +114,17 @@ describe("DELETE /api/users/:id", () => {
         expect(deletedUser).toBeNull();
 
     });
-    
-test("should return 404 if user does not exist", async () => {
 
-    const id = new mongoose.Types.ObjectId();
+    test("should return 404 if user does not exist", async () => {
 
-    const response = await request(app)
-        .delete(`/api/users/${id}`);
+        const id = new mongoose.Types.ObjectId();
 
-    expect(response.statusCode).toBe(404);
+        const response = await request(app)
+            .delete(`/api/users/${id}`);
 
-})
+        expect(response.statusCode).toBe(404);
 
-
-
+    })
 })
 
 
