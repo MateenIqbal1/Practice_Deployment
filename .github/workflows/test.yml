@@ -1,4 +1,4 @@
-name: Node.js Tests
+name: CI
 
 on:
   push:
@@ -24,3 +24,14 @@ jobs:
         run: npm test
         env:
           MONGO_URI: ${{ secrets.MONGO_URI }}
+
+  docker:
+    needs: test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: docker build -t testing-practice .
