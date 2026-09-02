@@ -35,3 +35,14 @@ jobs:
 
       - name: Build Docker image
         run: docker build -t testing-practice .
+      - name: Deploy container
+        run: |
+               docker stop testing-practice || true
+               docker rm testing-practice || true
+
+               docker run -d \
+                --name testing-practice \
+                --restart unless-stopped \
+                 --env-file ~/practice-deployment.env \
+                 -p 127.0.0.1:5000:5000 \
+                  testing-practice:latest
